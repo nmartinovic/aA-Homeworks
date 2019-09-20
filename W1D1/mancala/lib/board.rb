@@ -33,24 +33,33 @@ class Board
     stones = @cups[start_pos].length
     @cups[start_pos] = []
 
-    start_pos += 1
     stones.times do |stone|
-      #NEED TO FIGURE OUT HOW TO NOT DROP IN OPPONENTS STUFF
-      # if start_pos > 13
-      #   start_pos -= 13
-      # end
-      # if current_player_name == @name1 && start_pos != 13
-      #   @cups[start_pos] << :stone
-      #   start_pos +=1
-      # else
-      #   @cups[start_pos] << :stone
-      #   start_pos += 1
+      start_pos += 1
+      if start_pos > 13
+        start_pos = 0
       end
+      if current_player_name == @name1 && start_pos == 13
+        start_pos = 0
+      elsif current_player_name == @name2 && start_pos == 6
+        start_pos = 7
+      else
+        start_pos = start_pos
+      end
+      @cups[start_pos] << :stone
     end
+    self.render
+    self.next_turn(start_pos)
   end
 
   def next_turn(ending_cup_idx)
-    # helper method to determine whether #make_move returns :switch, :prompt, or ending_cup_idx
+    if ending_cup_idx == 6 || ending_cup_idx == 13
+      return :prompt
+    elsif @cups[ending_cup_idx].length == 1
+      return :switch
+    else
+      return ending_cup_idx
+    end
+
   end
 
   def render
@@ -62,8 +71,19 @@ class Board
   end
 
   def one_side_empty?
+    if @cups[0..5].all? { |cup| cup.empty? } || cups[7..12].all? { |cup| cup.empty? }
+      return true
+    end
+    false
   end
 
   def winner
+    if @cups[6].length == @cups[13].length
+      return :draw
+    elsif @cups[6].length > cups[13].length
+      return @name1
+    else
+      return @name2
+    end
   end
 end
