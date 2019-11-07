@@ -3,6 +3,8 @@ require_relative 'cursor.rb'
 
 class Display
 
+    attr_accessor :cursor
+    
     def initialize(board)
         @board = board
         @cursor = Cursor.new([0,0],board)
@@ -27,11 +29,12 @@ class Display
     end
 
     def test
-        while true
+        while @cursor.selected == false
             @cursor.get_input
             system("clear")
             self.render
         end
+        @cursor.cursor_pos
     end
 
 

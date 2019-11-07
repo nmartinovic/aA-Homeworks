@@ -14,6 +14,21 @@ class Piece
         { 'color' => @color, 'pos' => @pos, 'symbol' => @symbol}
     end
 
+    def valid_moves_piece
+        ok_moves = []
+        moves.each do |move|
+            duped_board = self.board.board_dup
+            duped_board.move_piece!(self.pos,move)
+            if !duped_board.in_check?(self.color)
+                ok_moves << move
+            end
+        end
+
+
+        ok_moves
+
+    end
+
 
 end
 
@@ -151,7 +166,7 @@ class King < Piece
     
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :K
+        @symbol = :E
     end
 
     def move_diffs
@@ -165,7 +180,7 @@ class Knight < Piece
 
     def initialize(color,board, pos)
         super(color,board,pos)
-        @symbol = :Kn
+        @symbol = :K
     end
 
     def move_diffs
@@ -237,7 +252,15 @@ class Pawn < Piece
         piece_x, piece_y = self.pos
 
         
-        piece_moves.select { |x| piece_x + x[0] > 0 && piece_x + x[0] < 8 && x[1] == 0}
+        piece_moves.select! { |x| piece_x + x[0] > 0 && piece_x + x[0] < 8 && x[1] == 0}
+
+        moves = []
+        piece_moves.each do |position|
+            if self.board[[piece_x + position[0],piece_y + position[1]]].instance_of?(NullPiece)
+                moves << position
+            end
+        end
+        moves            
     end
 
     
