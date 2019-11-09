@@ -124,7 +124,11 @@ class Bishop < Piece
 
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :B
+        if @color == :W
+            @symbol = "\u2657"
+        else
+            @symbol = "\u265d"
+        end
     end
 
     def move_dirs
@@ -137,7 +141,11 @@ class Queen < Piece
     include Slideable
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :Q
+        if @color == :W
+            @symbol = "\u2655"
+        else
+            @symbol = "\u265b"
+        end
     end
 
     def move_dirs
@@ -152,7 +160,11 @@ class Rook < Piece
     include Slideable
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :R
+        if @color == :W
+            @symbol = "\u2656"
+        else
+            @symbol = "\u265c"
+        end
     end
 
     def move_dirs
@@ -166,7 +178,11 @@ class King < Piece
     
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :E
+        if @color == :W
+            @symbol = "\u2654"
+        else
+            @symbol = "\u265a"
+        end
     end
 
     def move_diffs
@@ -180,7 +196,11 @@ class Knight < Piece
 
     def initialize(color,board, pos)
         super(color,board,pos)
-        @symbol = :K
+        if @color == :W
+            @symbol = "\u2658"
+        else
+            @symbol = "\u265e"
+        end
     end
 
     def move_diffs
@@ -210,11 +230,15 @@ class Pawn < Piece
 
     def initialize(color,board,pos)
         super(color,board,pos)
-        @symbol = :P
+        if color == :W
+            @symbol = "\u2659"
+        else
+            @symbol = "\u265f"
+        end
     end
 
     def symbol
-        :P
+        @symbol
     end
 
     def move_dirs

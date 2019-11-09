@@ -15,28 +15,35 @@ class Game
     def play
 
         while @board.checkmate?(:W) != true && @board.checkmate?(:B) != true
-            @display.render
-            while @display.cursor.selected == false
-                @display.cursor.get_input
-                system("clear")
+            begin
                 @display.render
-            end
-            start_pos = @display.cursor.cursor_pos
+                while @display.cursor.selected == false
+                    @display.cursor.get_input
+                    system("clear")
+                    @display.render
+                end
+                start_pos = @display.cursor.cursor_pos
 
-            @display.cursor.selected = false
+                @display.cursor.selected = false
 
-            while @display.cursor.selected == false
-                @display.cursor.get_input
+                while @display.cursor.selected == false
+                    @display.cursor.get_input
+                    system("clear")
+                    @display.render
+                end
+                end_pos = @display.cursor.cursor_pos
+                
+                @display.cursor.selected = false
+
+                #start_pos, end_pos = @players[@current_player].make_move
+                if @board[start_pos].color == @current_player
+                    @board.move_piece(start_pos,end_pos)
+                else
+                    raise "select your position"
+                end
+            rescue
                 system("clear")
-                @display.render
-            end
-            end_pos = @display.cursor.cursor_pos
-            
-            @display.cursor.selected = false
-
-            #start_pos, end_pos = @players[@current_player].make_move
-            if @board[start_pos].color == @current_player
-                @board.move_piece(start_pos,end_pos)
+                retry
             end
             system("clear")
             swap_turn!

@@ -60,16 +60,13 @@ class Board
 
 
     def move_piece(start_pos, end_pos)
-        begin
-            if self[start_pos] == [] || self[end_pos] == []
-                raise StandardError "Enter a valid position"
-            end
-            if self[start_pos].valid_moves_piece.include?(end_pos) == false
-                raise StandardError "Move is invalid"
-            end
-        rescue
-            retry
+        if self[start_pos] == [] || self[end_pos] == []
+            raise StandardError "Enter a valid position"
         end
+        if self[start_pos].valid_moves_piece.include?(end_pos) == false
+            raise StandardError "Move is invalid"
+        end
+        
         self[end_pos] = self[start_pos].dup
         self[end_pos].pos = end_pos
         self[start_pos] = NullPiece.instance
@@ -105,7 +102,7 @@ class Board
     def find_king(color)
         @rows.each do |row|
             row.each do |column|
-                if column.symbol == :E && column.color == color
+                if column.instance_of?(King) && column.color == color
                     return column.pos
                 end
             end
@@ -133,7 +130,7 @@ class Board
         @rows.each do |row|
             row.each do |piece|
                 if piece.color == color && piece.valid_moves_piece != []
-                    puts piece.pos
+                    #puts piece.pos
                     return false
                 end
             end
