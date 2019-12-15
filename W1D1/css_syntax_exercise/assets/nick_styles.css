@@ -1,0 +1,37 @@
+body { 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 { 
+    font-size: 38px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+.ingredients-list {
+    list-style: square inside;
+}
+
+ol {
+    list-style: lower-roman;
+}
+
+header > img {
+    width: 100px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+html {
+    background-color: lavender;
+    line-height: 1.5;
+}
+
+.user_review {
+    font-style: italic;
+}
