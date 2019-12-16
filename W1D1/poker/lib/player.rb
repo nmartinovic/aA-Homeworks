@@ -5,7 +5,7 @@ class Player
 
 
     attr_reader :name, :pot, :hand, :in_hand, :game, :bet
-    attr_writer :hand, :game, :bet
+    attr_writer :hand, :game, :bet, :pot
 
     def initialize(name, pot,game_object)
         @name = name
@@ -78,26 +78,35 @@ class Player
     end
 
     def input_action
-        puts "Would you like to fold, raise, or call the current bet?  Please enter 'f', 'r', or 'c'"
-        input = gets.chomp
-        if input == 'f'
-            return ['fold',0]
-        elsif input == 'r'
-            begin
-                puts "How much would you like to raise?"
-                bet_amount = gets.chomp.to_i
-                if bet_amount =< @game.current_bet[0]
-                    puts "You must bet more than #{game.current_bet[0]}"
-                    raise "Bet amount must be greater than current bet"
+        begin
+            puts "Would you like to fold, raise, or call the current bet?  Please enter 'f', 'r', or 'c'"
+            input = gets.chomp
+            if input == 'f'
+                return ['fold',0]
+            elsif input == 'r'
+                begin
+                    puts "How much would you like to raise?"
+                    bet_amount = gets.chomp.to_i
+                    if bet_amount <= @game.current_bet[0]
+                        puts "You must bet more than #{game.current_bet[0]}"
+                        raise "Bet amount must be greater than current bet"
+                    end
+                    if bet_amount > @pot
+                        puts "You cannot bet more than what you have.  Please try again"
+                        raise "Attempted bet bigger than bank"
+                    end
+                rescue
+                    retry
                 end
-            rescue
-                retry
+                return ['raise',bet_amount]
+            elsif input == 'c'
+                return ['call',@game.current_bet[0]]
+            else
+                puts "You must enter r, c, or f"
+                raise "Wrong input"
             end
-            return ['raise',bet_amount]
-        elsif input == 'c'
-            return ['call',@game.current_bet[0]]
-        else
-            nil
+        rescue
+            retry
         end
     end
 end

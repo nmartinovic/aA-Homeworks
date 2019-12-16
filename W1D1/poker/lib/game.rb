@@ -37,7 +37,7 @@ class Game
 
     def turn
         @players[@current_turn].hand.hand_sort
-        puts "#{@players[current_turn].name}, it is your turn.  Bet, call or fold?  The pot is #{@current_pot} and the current_bet is #{@current_bet[0]}"
+        puts "#{@players[current_turn].name}, it is your turn.  Bet, call or fold?  The pot is #{@current_pot} and the current_bet is #{@current_bet[0]}.  Your bank is #{@players[@current_turn].pot}"
         puts @players[@current_turn].render
         @players[@current_turn].player_action
         system("clear")
@@ -59,17 +59,23 @@ class Game
     def determine_winner
         best_hand = 0
         winner = nil
-        @players.each do |player|
+        hand = nil
+        player_i_winner = nil
+        @players.each_with_index do |player, index|
             if player.in_hand == true && player.hand.hand_value > best_hand
                 best_hand = player.hand.hand_value
                 winner = player.name
+                hand = player.render
+                player_i_winner = index
             end
         end
-        winner
+        [winner, hand, player_i_winner]
 
     end
 
     def round_of_betting
+        @current_bet[0] = 0
+        @current_turn = 0
         @players.each do |player|
             if player.in_hand == true
                 turn
@@ -97,6 +103,25 @@ class Game
                 end
             end
         end
+
+    end
+
+    def leaderboard
+        puts "Current Bank"
+
+        @players.each do |player|
+            puts "#{player.name}: #{player.pot}"    
+        end
+
+    end
+
+    def new_round
+        @Deck = Deck.new
+        @players.each do |player|
+            player.bet = []
+        end
+        @current_pot = 0
+        @current_bet = [0]
 
     end
 end
