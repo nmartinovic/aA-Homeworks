@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+#require_relative 'app/models/user.rb'
+
+puts "Input your email:"
+email_input = gets.chomp
+#determine if user exists in users table
+if User.exists?(email: email_input) == false
+    user = User.new(email: email_input)
+    user.save!
+end
+
+user = User.find_by(email: email_input)
+puts user
+
+puts "What do you want to do?"
+puts "0. Create shortened URL"
+puts "1. Visit shortened URL"
+selection_input = gets.chomp
+
+if selection_input == "0"
+    puts "Type in your long url"
+    long_url_input = gets.chomp
+    Shortened_Url.create!(user,long_url_input)
+    s = Shortened_Url.last
+    puts "Your short URL is: #{s.short_url}"
+end
+
+if selection_input == "1"
+    puts "Type in the shortened URL"
+    shortened_url_input = gets.chomp
+    long_url = Shortened_Url.find_by(short_url: shortened_url_input).long_url
+    puts "Launching #{long_url} in web browser...."
+    Launchy.open(long_url)
+    Visit.record_visit!(user, shortened_url_input)
+end
+
+puts "Goodbye!"
