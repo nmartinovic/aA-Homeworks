@@ -5,6 +5,13 @@ class Shortened_Url < ApplicationRecord
 
     validates :long_url, presence:true
     validates :short_url, presence: true, uniqueness: true
+    validate :no_spamming
+    validate :nonpremium_max
+
+    def self.prune(min)
+
+
+    end
 
     def self.random_code
         surl = SecureRandom.urlsafe_base64(6)
@@ -12,6 +19,19 @@ class Shortened_Url < ApplicationRecord
             surl = SecureRandom.urlsafe_base64(6)
         end
         surl
+    end
+
+    def no_spamming
+        if self.submitter.submitted_urls.where('created_at > ?',1.minutes.ago).count(:long_url) >=1
+            errors[:short_url] << "User has submitted too many URLs in 1 minute"
+        end
+    end
+
+    def nonpremium_max
+        if self.submitter.submitted_urls.count(:long_url) >= 5 and self.submitter.premium == false
+            errors[self.submitter.email]  << "is not a premium user"
+        end
+
     end
 
     def self.create!(user, lurl)
