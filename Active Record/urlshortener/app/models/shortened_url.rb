@@ -5,12 +5,12 @@ class Shortened_Url < ApplicationRecord
 
     validates :long_url, presence:true
     validates :short_url, presence: true, uniqueness: true
-    validate :no_spamming
-    validate :nonpremium_max
+    validate :no_spamming, :nonpremium_max
 
     def self.prune(min)
-
-
+        # deletes shortened_urls that have not been visited in n minutes
+        # delete shortened_urls that are older than n minutes but have never been visited
+        Shortened_Url.all.joins("FULL JOIN visits on shortened_urls.short_url = visits.shortened_url").where('visits.updated_at < ? or visits.id is ?', 1.minutes.ago, nil).destroy_all
     end
 
     def self.random_code
@@ -29,7 +29,7 @@ class Shortened_Url < ApplicationRecord
 
     def nonpremium_max
         if self.submitter.submitted_urls.count(:long_url) >= 5 and self.submitter.premium == false
-            errors[self.submitter.email]  << "is not a premium user"
+            errors.add(:user_id, "can't have more than 5 urls")
         end
 
     end
@@ -60,7 +60,8 @@ class Shortened_Url < ApplicationRecord
 
     has_many(
         :visitors,
-        Proc.new { distinct },
+        dependent: :destroy,
+        #Proc.new { distinct },
         class_name: 'Visit',
         foreign_key: :shortened_url,
         primary_key: :short_url
@@ -68,6 +69,7 @@ class Shortened_Url < ApplicationRecord
 
     has_many(
         :clicks,
+        dependent: :destroy,
         class_name: 'Visit',
         foreign_key: :shortened_url,
         primary_key: :short_url
@@ -75,6 +77,7 @@ class Shortened_Url < ApplicationRecord
 
     has_many(
         :tags,
+        dependent: :destroy,
         class_name: 'Tagging',
         foreign_key: :long_url,
         primary_key: :long_url

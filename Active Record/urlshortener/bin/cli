@@ -22,7 +22,11 @@ if selection_input == "0"
     long_url_input = gets.chomp
     Shortened_Url.create!(user,long_url_input)
     s = Shortened_Url.last
-    puts "Your short URL is: #{s.short_url}"
+    if s.long_url != long_url_input
+        puts "#{errors[-1]} - URL not saved"
+    else
+        puts "Your short URL is: #{s.short_url}"
+    end
 end
 
 if selection_input == "1"
