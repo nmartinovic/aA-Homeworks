@@ -35,7 +35,7 @@ class Shortened_Url < ApplicationRecord
     end
 
     def self.create!(user, lurl)
-        Shortened_Url.new(long_url: lurl, short_url: Shortened_Url.random_code,user_id: user.id).save
+        Shortened_Url.new(long_url: lurl, short_url: Shortened_Url.random_code,user_id: user.id).save!
 
     end
 
