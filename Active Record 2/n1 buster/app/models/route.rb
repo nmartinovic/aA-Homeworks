@@ -21,5 +21,12 @@ class Route < ApplicationRecord
 
   def better_drivers_query
     # TODO: your code here
+    #{'1' => ['Joan Lee', 'Charlie McDonald', 'Kevin Quashie'], '2' => ['Ed Michaels', 'Lisa Frank', 'Sharla Alegria']}
+    ao_object = self.buses.joins(:drivers).select('buses.*','drivers.*')
+    drivers = Hash.new { |hash, key| hash[key] = [] }
+    ao_object.each do |ele|
+      drivers[ele.bus_id] << ele.name
+    end
+    drivers
   end
 end

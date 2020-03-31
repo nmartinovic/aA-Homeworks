@@ -20,5 +20,13 @@ class House < ApplicationRecord
 
   def better_seeds_query
     # TODO: your code here
+    ao_object = self.plants.joins(:seeds).select('plants.species').distinct
+    seeds = []
+    ao_object.each do |i|
+      seeds << i.species
+    end
+    seeds
+
+    
   end
 end
