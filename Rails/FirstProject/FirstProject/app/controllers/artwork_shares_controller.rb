@@ -1,9 +1,7 @@
 class ArtworkSharesController < ApplicationController
 
-    def index
-        
-        render json: ArtworkShare.
-    end
+    # def index
+    # end
 
     def create
         artwork_share = ArtworkShare.new(artwork_share_params)
