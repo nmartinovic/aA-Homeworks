@@ -1,0 +1,18 @@
+<h1> This is <%= @cat.name %>'s page</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="2"><%= @cat.name %></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @cat.attributes.each do |key,value| %>
+    <tr>
+        <td><%= key %></td>
+        <td><%= value %></td>
+    </tr>
+        <% end %>
+    </tbody>
+</table>
+

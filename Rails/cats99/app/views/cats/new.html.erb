@@ -1,0 +1,28 @@
+# Continue to fill out this form
+
+<h1>Add Cat to stuff </h1>
+
+<form action="/cats" method="post">
+<label for="name">Name</label>
+<input id="name" type="text" name="cats[name]">
+
+<label for="color">Color</label>
+<select name="color" id="cats[color]">
+    <% Cat::COLORS.each do |color|%>
+    <option value="<%color%>"><%= color %></option>
+
+    <%end%>
+
+</select>
+
+<label for="birth_date">Birth Date</label>
+<input id="birth_date" type="text" name="cats[birth_date]">
+
+<label for="sex">Sex</label>
+<input id="sex" type="text" name="cats[sex]">
+
+<label for="description">Description</label>
+<input id="description" type="text" name="cats[description]">
+
+<input type="submit" value="Add Cat">
+</form>
