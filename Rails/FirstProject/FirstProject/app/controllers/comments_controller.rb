@@ -2,16 +2,25 @@ class CommentsController < ApplicationController
 
     #TODO: INDEX method (or INDEX action) 04/21/2020
     def index
-        if params[:comment][:user_id]
-            comments = Comment.where(user_id: params[:comment][:user_id])
-            render json: comments
-        elsif
-            params[:comment][:artwork_id]
-            comments = Comment.where(artwork_id: params[:comment][:artwork_id])
-            render json: comments
+        # if params.dig(:comment,:user_id).nil? == false
+        #     comments = Comment.where(user_id: params[:comment][:user_id])
+        #     render json: comments
+        # elsif
+        #     params.dig(:comment,:artwork_id).nil? == false
+        #     comments = Comment.where(artwork_id: params[:comment][:artwork_id])
+        #     render json: comments
+        # else
+        #     render json: Comment.all
+        # end
+        case
+        when params[:user_id]
+            comments = Comment.where(user_id: params[:user_id])
+        when params[:artwork_id]
+            comments = Comment.where(artwork_id: params[:artwork_id])
         else
-            render json: Comment.all
+            comments = Comment.all
         end
+        render json: comments
     end
 
     def create
