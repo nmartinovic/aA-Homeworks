@@ -1,3 +1,5 @@
+#finish this update/create
+
 class CatsController < ApplicationController
 
     def index
@@ -15,15 +17,27 @@ class CatsController < ApplicationController
     end
 
     def edit
+        @cat = Cat.find_by(id: params[:id])
+        render :edit
+    end
+
+    def update
+
     end
 
     def create
-        render json: "Creating cat"
+        @cat = Cat.new(cat_params)
+
+        if @cat.save
+            redirect_to cat_url(@cat)
+        else
+            render :new
+        end
     end
 
 
     private
     def cat_params
-        params.require(:cat).permit(:birth_date, :color, :sex, :name, :description)
+        params.require(:cats).permit(:birth_date, :color, :sex, :name, :description)
     end
 end

@@ -1,9 +1,10 @@
 
-<h1>Add Cat to stuff </h1>
+<h1>Edit Cat to stuff </h1>
 
-<form action="<%= cats_url %>" method="post">
+<form action="<%= cat_url(@cat) %>" method="post">
+<input type="hidden" name ="_method" value= "PATCH">
 <label for="name">Name</label>
-<input id="name" type="text" name="cats[name]">
+<input id="name" type="text" name="cats[name]" value="<%= @cat.name %>">
 
 <label for="color">Color</label>
 <select name="cats[color]" id="color">
@@ -14,7 +15,7 @@
 </select>
 
 <label for="birth_date">Birth Date</label>
-<input id="birth_date" type="date" name="cats[birth_date]">
+<input id="birth_date" type="date" name="cats[birth_date]" value="<%= @cat.birth_date %>">
 
 <input type="radio" id="male" name="cats[sex]" value="m">
 <label for="male">Male</label><br>
@@ -23,7 +24,7 @@
 
 
 <label for="description">Description</label>
-<textarea name="cats[description]" id="description" cols="30" rows="10"></textarea>
+<textarea name="cats[description]" id="description" cols="30" rows="10"><%= @cat.description %></textarea>
 
-<input type="submit" value="Add Cat">
+<input type="submit" value="Update Cat">
 </form>
