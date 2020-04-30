@@ -1,6 +1,10 @@
 
 <h1>Edit Cat to stuff </h1>
 
+<%= render 'form', cat: @cat, action: :edit %>
+
+<!--
+
 <form action="<%= cat_url(@cat) %>" method="post">
 <input type="hidden" name ="_method" value= "PATCH">
 <label for="name">Name</label>
@@ -8,18 +12,22 @@
 
 <label for="color">Color</label>
 <select name="cats[color]" id="color">
-    <option value="" selected disabled>- pick a color -</option>
     <% Cat::COLORS.each do |color|%>
+    <% if @cat.color == color %>
+    <option value="<%=color%>" selected><%= color %></option>
+    <% else %>
     <option value="<%=color%>"><%= color %></option>
+    <% end %>
+
     <%end%>
 </select>
 
 <label for="birth_date">Birth Date</label>
 <input id="birth_date" type="date" name="cats[birth_date]" value="<%= @cat.birth_date %>">
 
-<input type="radio" id="male" name="cats[sex]" value="m">
+<input  type="radio" id="male" name="cats[sex]" value="m" <%= @cat.sex == "m" ? 'checked' : "" %>>
 <label for="male">Male</label><br>
-<input type="radio" id="female" name="cats[sex]" value="f">
+<input type="radio" id="female" name="cats[sex]" value="f" <%= @cat.sex == "f" ? 'checked' : "" %>>
 <label for="female">Female</label><br>
 
 
@@ -28,3 +36,4 @@
 
 <input type="submit" value="Update Cat">
 </form>
+-->

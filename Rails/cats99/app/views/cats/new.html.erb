@@ -1,6 +1,11 @@
 
 <h1>Add Cat to stuff </h1>
 
+<%= render 'form', cat: @cat, action: :new %>
+
+
+
+<!--
 <form action="<%= cats_url %>" method="post">
 <label for="name">Name</label>
 <input id="name" type="text" name="cats[name]">
@@ -27,3 +32,4 @@
 
 <input type="submit" value="Add Cat">
 </form>
+-->

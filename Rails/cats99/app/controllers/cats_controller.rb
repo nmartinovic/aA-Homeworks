@@ -1,5 +1,4 @@
-#finish this update/create
-
+#finish unifying the view
 class CatsController < ApplicationController
 
     def index
@@ -13,6 +12,7 @@ class CatsController < ApplicationController
     end
 
     def new
+        @cat = Cat.new
         render :new
     end
 
@@ -22,7 +22,13 @@ class CatsController < ApplicationController
     end
 
     def update
+        @cat = Cat.find_by(id: params[:id])
 
+            if @cat.update_attributes(cat_params)
+            redirect_to cat_url(@cat)
+        else
+            render :edit
+        end
     end
 
     def create
