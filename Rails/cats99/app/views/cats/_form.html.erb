@@ -2,8 +2,8 @@
 Things to change
 * action --done
 * hidden input for patch --done
-* prefilled values
-* Submit button
+* prefilled values --done
+* Submit button --done
  
 
 -->
@@ -49,5 +49,5 @@ Things to change
 <label for="description">Description</label>
 <textarea name="cats[description]" id="description" cols="30" rows="10"><%= cat.description %></textarea>
 
-<input type="submit" value="Update Cat">
+<input type="submit" value="<%= action == :edit ? 'Update Cat' : 'Add a cat' %>">
 </form>
