@@ -1,4 +1,3 @@
-#finish unifying the view
 class CatsController < ApplicationController
 
     def index

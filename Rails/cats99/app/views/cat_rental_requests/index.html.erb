@@ -1,0 +1,49 @@
+<h1>Request a cat</h1>
+
+
+<form action="<%= cat_rental_requests_url %>" method="post">
+<label for="name">Name</label>
+<select name="cat_rental_requests[cat_id]" id="name">
+    <option value="" selected disabled>--select a cat--</option>
+    <%Cat.all.each do |kitten| %>
+    <option value="<%= kitten.id %>"><%=kitten.name %></option>
+    <%end%>
+</select>
+
+<label for="start_date">Start Date</label>
+<input id="start_date" type='date' name="cat_rental_requests[start_date]">
+
+<label for="end_date">End Date</label>
+<input id="end_date" type='date' name="cat_rental_requests[end_date]">
+
+<input type="submit" value="Request Cat">
+</form>
+
+<!--
+<form action="<%= cats_url %>" method="post">
+<label for="name">Name</label>
+<input id="name" type="text" name="cats[name]">
+
+<label for="color">Color</label>
+<select name="cats[color]" id="color">
+    <option value="" selected disabled>- pick a color -</option>
+    <% Cat::COLORS.each do |color|%>
+    <option value="<%=color%>"><%= color %></option>
+    <%end%>
+</select>
+
+<label for="birth_date">Birth Date</label>
+<input id="birth_date" type="date" name="cats[birth_date]">
+
+<input type="radio" id="male" name="cats[sex]" value="m">
+<label for="male">Male</label><br>
+<input type="radio" id="female" name="cats[sex]" value="f">
+<label for="female">Female</label><br>
+
+
+<label for="description">Description</label>
+<textarea name="cats[description]" id="description" cols="30" rows="10"></textarea>
+
+<input type="submit" value="Add Cat">
+</form>
+-->
