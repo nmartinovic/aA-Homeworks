@@ -1,4 +1,4 @@
-<!-- # figure out how I can show existing rental requests -->
+<!-- # how to approve/reject items -->
 
 <h1> This is <%= @cat.name %>'s page</h1>
 
@@ -20,3 +20,55 @@
 
     <br>
     <h2>Reservation Requests</h2>
+    <table>
+    <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+    </tr>
+    <% @cat.reservations.each do |reservation| %>
+    <tr>
+    <td><%= reservation.start_date %></td>
+    <td><%= reservation.end_date %></td>
+    <td><%= reservation.status %></td>
+    <% if reservation.status == 'PENDING'%>
+        <td><form action="<%= approve_cat_rental_request_url %>" method="post">
+        <input type="submit" value="Approve">
+        </form></td>
+        <td><form action="<%= deny_cat_rental_request_url %>" method="post">
+        <input type="submit" value="Deny">
+        </form></td>
+    <% end %>
+    
+    </tr>
+    <% end %>
+    </table>
+
+<!--
+<form action="<%= cats_url %>" method="post">
+<label for="name">Name</label>
+<input id="name" type="text" name="cats[name]">
+
+<label for="color">Color</label>
+<select name="cats[color]" id="color">
+    <option value="" selected disabled>- pick a color -</option>
+    <% Cat::COLORS.each do |color|%>
+    <option value="<%=color%>"><%= color %></option>
+    <%end%>
+</select>
+
+<label for="birth_date">Birth Date</label>
+<input id="birth_date" type="date" name="cats[birth_date]">
+
+<input type="radio" id="male" name="cats[sex]" value="m">
+<label for="male">Male</label><br>
+<input type="radio" id="female" name="cats[sex]" value="f">
+<label for="female">Female</label><br>
+
+
+<label for="description">Description</label>
+<textarea name="cats[description]" id="description" cols="30" rows="10"></textarea>
+
+<input type="submit" value="Add Cat">
+</form>
+-->

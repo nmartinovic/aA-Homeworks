@@ -21,7 +21,7 @@ class CatRentalRequest < ApplicationRecord
     end
 
     def overlapping_approved_requests
-        overlapping_requests.where("status = ?",'APPROVED')
+        overlapping_requests.where("status = ? and id != ?",'APPROVED',self.id)
     end
 
     def does_not_overlap_approved_request
@@ -29,5 +29,28 @@ class CatRentalRequest < ApplicationRecord
             errors.add(:start_date, "There is an overlapping request")
         end
     end
+
+    def overlapping_pending_requests
+        overlapping_requests.where("status = ?",'PENDING')
+    end
+
+    def approve!
+
+        ActiveRecord::Base.transaction do 
+            self.status = 'APPROVED'
+            to_deny = overlapping_pending_requests.where("id != ?", self.id)
+            to_deny.each do |deny|
+                deny.status = 'DENIED'
+                deny.save!
+            end
+            self.save!
+        end
+    end
+
+    def deny!
+        self.status = 'DENIED'
+        self.save
+    end
+
 
 end
