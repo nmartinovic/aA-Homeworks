@@ -1,0 +1,14 @@
+<h1>This is the session new page</h1>
+
+<h2>Log in below</h2>
+
+<form action="<%= session_url %>" method="post">
+<label for="user_user_name">Enter your username</label>
+<input type="text" name="user[user_name]" id="user_user_name">
+<br>
+<label for="user_password">Enter your password</label>
+<input type="password" name="user[password]" id="user_password">
+<br>
+<input type="submit" name="Log in!">
+
+</form>
