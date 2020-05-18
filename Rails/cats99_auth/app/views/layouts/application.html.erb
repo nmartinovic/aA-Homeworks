@@ -12,5 +12,16 @@
   <% end %>
   <body>
     <%= yield %>
+    <% unless current_page?(new_session_url) %>
+    <% if current_user %>
+      <form action="<%= session_url %>" method= 'POST'>
+      <input type="hidden" name='_method' value='DELETE'>
+      <input type="submit" value="log out">
+      </form>
+    <% else %>
+<%= button_to "Log In", new_session_url, :method => "get" %>
+    <% end %>
+    <% end%>
+
   </body>
 </html>

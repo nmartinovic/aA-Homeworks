@@ -11,13 +11,14 @@ class SessionsController < ApplicationController
         #redirect to cats_index page
 
         @user = User.find_by_credentials(params[:user][:user_name],params[:user][:password])
-
+        
         if @user.nil? 
             render json: "this did not work"
         end
-
+        
+        fail
         @user.reset_session_token!
-        session[:session_token] = @user.session_token
+        self.session[:session_token] = @user.session_token
         redirect_to cats_url
     end
 
@@ -26,6 +27,7 @@ class SessionsController < ApplicationController
             current_user.reset_session_token!
         end
         session[:session_token] = nil
+        redirect_to cats_url
     end
 
     private 
