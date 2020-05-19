@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    before_action :logged_in?, only: [:new,:create]
 
     def new
         render :new
@@ -14,12 +15,10 @@ class SessionsController < ApplicationController
         
         if @user.nil? 
             render json: "this did not work"
+        else
+            log_in(@user)
+            redirect_to cats_url
         end
-        
-        fail
-        @user.reset_session_token!
-        self.session[:session_token] = @user.session_token
-        redirect_to cats_url
     end
 
     def destroy
@@ -34,4 +33,6 @@ class SessionsController < ApplicationController
     def session_params
         params.require(:user).permit(:user_name, :password)
     end
+
+
 end

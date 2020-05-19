@@ -2,6 +2,16 @@ class User < ApplicationRecord
     attr_reader :password
     validates :user_name, :password_digest, presence: true
 
+    has_many :cat_rentals,
+    class_name: :CatRentalRequest,
+    primary_key: :id,
+    foreign_key: :user_id
+
+    has_many :cats,
+    class_name: :Cat,
+    primary_key: :id,
+    foreign_key: :user_id
+
     after_initialize :set_session_token
 
     def self.find_by_credentials(user_name, password)
