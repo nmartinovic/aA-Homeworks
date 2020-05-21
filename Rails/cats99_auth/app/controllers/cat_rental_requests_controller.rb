@@ -40,11 +40,12 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def cat_rental_request_params
-    params.require(:cat_rental_request).permit(:cat_id, :end_date, :start_date, :status)
+    params.require(:cat_rental_request).permit(:cat_id, :end_date, :start_date, :status, :user_id)
   end
 
   def user_cat?
-    @cat = Cat.find(params[:id])
+    @cat = CatRentalRequest.find(params[:id]).cat
+
     if !current_user.cats.include?(@cat)
       redirect_to cat_url(current_cat)
     end

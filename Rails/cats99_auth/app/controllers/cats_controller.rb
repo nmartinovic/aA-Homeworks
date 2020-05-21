@@ -49,6 +49,7 @@ class CatsController < ApplicationController
   end
 
   def user_cat?
+    #fail
     @cat = Cat.find(params[:id])
     if !current_user.cats.include?(@cat)
       redirect_to cats_url
