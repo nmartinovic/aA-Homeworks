@@ -1,0 +1,9 @@
+<h1>Create a new band</h1>
+
+<% if !flash[:errors].nil? %>
+    <% flash[:errors].each do |error| %>
+    <h2><%= error %></h2>
+    <% end %>
+<% end %>
+
+<%= render 'shared/form', band: @band %>

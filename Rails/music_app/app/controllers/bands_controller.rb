@@ -1,17 +1,51 @@
 class BandsController < ApplicationController
 
     def create
+        #TODO update the views for band:create
         @band = Band.new(band_params)
-        if @band.save!
-            render json: "this worked!"
+        if @band.save
+            redirect_to bands_url
         else
-            render json: "this returned an error"
+            flash.now[:errors] = @band.errors.full_messages
+            render :new
         end
     end
 
     def index
+        @bands = Band.all
+        render :index
+    end
+
+    def new
+        @band = Band.new
+        render :new
+    end
+
+    def edit
+        #TODO update the band:edit
         @band = Band.find_by(id: params[:id])
-        render json: @band
+        render :edit
+    end
+
+    def show
+        @band = Band.find_by(id: params[:id])
+        render json: "#{@band} & this will be replaced by an show page"    
+    end
+
+    def update
+        @band = Band.find_by(id: [params[:id]])
+        if @band.update_attributes(band_params)
+            render json: "Band successfully updated"
+        else
+            flash.now[:errors] = @band.errors.full_messages
+            render json: "This was not successful"
+        end
+
+    end
+
+    def destroy
+        @band = Band.find_by(id: params[:id])
+        @band.destroy
     end
 
     private
