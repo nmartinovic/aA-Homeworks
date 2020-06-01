@@ -2857,3 +2857,401 @@ Processing by AlbumsController#new as */*
 Completed 200 OK in 25ms (Views: 0.1ms | ActiveRecord: 8.8ms)
 
 
+  [1m[36mBand Load (7.1ms)[0m  [1m[34mSELECT "bands".* FROM "bands"[0m
+  [1m[36mAlbum Load (2.9ms)[0m  [1m[34mSELECT "albums".* FROM "albums"[0m
+Started POST "/albums" for ::1 at 2020-06-02 07:38:26 +0900
+  [1m[35m (4.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/nickmartinovic/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by AlbumsController#create as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"4", "year"=>"2014", "studio?"=>"True"}}
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:11
+  [1m[36mBand Load (2.2ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:11
+  [1m[36mAlbum Create (11.4ms)[0m  [1m[32mINSERT INTO "albums" ("name", "band_id", "year", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Red"], ["band_id", 4], ["year", 2014], ["created_at", "2020-06-01 22:38:26.918629"], ["updated_at", "2020-06-01 22:38:26.918629"]]
+  ↳ app/controllers/albums_controller.rb:11
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/albums_controller.rb:11
+Completed 200 OK in 152ms (Views: 0.2ms | ActiveRecord: 42.3ms)
+
+
+  [1m[36mAlbum Load (0.6ms)[0m  [1m[34mSELECT "albums".* FROM "albums"[0m
+  [1m[36mAlbum Load (0.4ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" ORDER BY "albums"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mBand Load (0.3ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Started POST "/albums" for ::1 at 2020-06-02 07:38:55 +0900
+Processing by AlbumsController#create as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"40", "year"=>"2014", "studio?"=>"True"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:11
+  [1m[36mBand Load (0.4ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 40], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:11
+  [1m[35m (1.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/albums_controller.rb:11
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/albums/2/edit" for ::1 at 2020-06-02 07:40:52 +0900
+Processing by AlbumsController#edit as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 582ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - undefined local variable or method `id' for #<AlbumsController:0x00007f9013e91088>:
+  app/controllers/albums_controller.rb:19:in `edit'
+
+Started GET "/albums/2/edit" for ::1 at 2020-06-02 07:41:27 +0900
+Processing by AlbumsController#edit as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mAlbum Load (0.6ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:19
+Completed 200 OK in 23ms (Views: 0.1ms | ActiveRecord: 8.7ms)
+
+
+Started GET "/albums/" for ::1 at 2020-06-02 07:42:18 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/albums"):
+  
+actionpack (5.2.4.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/albums/2" for ::1 at 2020-06-02 07:42:57 +0900
+Processing by AlbumsController#show as */*
+  Parameters: {"id"=>"2"}
+Completed 200 OK in 16ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/albums/2" for ::1 at 2020-06-02 07:43:33 +0900
+
+SyntaxError - unterminated string meets end of file
+/Users/nickmartinovic/Desktop/aA-homeworks/Rails/music_app/app/controllers/albums_controller.rb:33: syntax error, unexpected end-of-input, expecting keyword_end:
+  app/controllers/albums_controller.rb:33:in `'
+
+Started GET "/albums/2" for ::1 at 2020-06-02 07:43:44 +0900
+Processing by AlbumsController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mAlbum Load (0.6ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:24
+Completed 200 OK in 41ms (Views: 0.2ms | ActiveRecord: 11.1ms)
+
+
+Started PATCH "/albums/2" for ::1 at 2020-06-02 07:46:33 +0900
+Processing by AlbumsController#update as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"2", "year"=>"2015", "studio?"=>"True"}, "id"=>"2"}
+  [1m[36mAlbum Load (1.1ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:29
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mBand Load (1.1ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mAlbum Update (4.4ms)[0m  [1m[33mUPDATE "albums" SET "band_id" = $1, "year" = $2, "updated_at" = $3 WHERE "albums"."id" = $4[0m  [["band_id", 2], ["year", 2015], ["updated_at", "2020-06-01 22:46:34.156153"], ["id", 2]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/albums_controller.rb:30
+Completed 200 OK in 146ms (Views: 5.7ms | ActiveRecord: 32.9ms)
+
+
+Started PATCH "/albums/2" for ::1 at 2020-06-02 07:46:45 +0900
+Processing by AlbumsController#update as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"2", "year"=>"2015", "studio?"=>"False"}, "id"=>"2"}
+  [1m[36mAlbum Load (0.6ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:29
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mBand Load (0.5ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/albums_controller.rb:30
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 1.4ms)
+
+
+Started PATCH "/albums/2" for ::1 at 2020-06-02 07:46:49 +0900
+Processing by AlbumsController#update as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"2", "year"=>"2015", "studio?"=>"False"}, "id"=>"2"}
+  [1m[36mAlbum Load (4.4ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:29
+  [1m[35m (4.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mBand Load (10.5ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[35m (14.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/albums_controller.rb:30
+Completed 200 OK in 55ms (Views: 0.5ms | ActiveRecord: 34.3ms)
+
+
+Started PATCH "/albums/2" for ::1 at 2020-06-02 07:46:53 +0900
+Processing by AlbumsController#update as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"2", "year"=>"2015", "studio?"=>"false"}, "id"=>"2"}
+  [1m[36mAlbum Load (0.7ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:29
+  [1m[35m (2.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mBand Load (0.6ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mAlbum Update (0.8ms)[0m  [1m[33mUPDATE "albums" SET "studio?" = $1, "updated_at" = $2 WHERE "albums"."id" = $3[0m  [["studio?", false], ["updated_at", "2020-06-01 22:46:53.341020"], ["id", 2]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/albums_controller.rb:30
+Completed 200 OK in 24ms (Views: 0.7ms | ActiveRecord: 4.9ms)
+
+
+Started PATCH "/albums/2" for ::1 at 2020-06-02 07:47:01 +0900
+Processing by AlbumsController#update as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"2", "year"=>"2014", "studio?"=>"true"}, "id"=>"2"}
+  [1m[36mAlbum Load (0.4ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:29
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mBand Load (1.6ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[36mAlbum Update (0.9ms)[0m  [1m[33mUPDATE "albums" SET "year" = $1, "studio?" = $2, "updated_at" = $3 WHERE "albums"."id" = $4[0m  [["year", 2014], ["studio?", true], ["updated_at", "2020-06-01 22:47:01.073196"], ["id", 2]]
+  ↳ app/controllers/albums_controller.rb:30
+  [1m[35m (8.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/albums_controller.rb:30
+Completed 200 OK in 26ms (Views: 0.3ms | ActiveRecord: 12.7ms)
+
+
+Started DELETE "/albums/2" for ::1 at 2020-06-02 07:48:15 +0900
+Processing by AlbumsController#destroy as */*
+  Parameters: {"album"=>{"name"=>"Red", "band_id"=>"2", "year"=>"2014", "studio?"=>"true"}, "id"=>"2"}
+  [1m[36mAlbum Load (0.3ms)[0m  [1m[34mSELECT  "albums".* FROM "albums" WHERE "albums"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:38
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:39
+  [1m[36mAlbum Destroy (0.7ms)[0m  [1m[31mDELETE FROM "albums" WHERE "albums"."id" = $1[0m  [["id", 2]]
+  ↳ app/controllers/albums_controller.rb:39
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/albums_controller.rb:39
+No template found for AlbumsController#destroy, rendering head :no_content
+Completed 204 No Content in 482ms (ActiveRecord: 11.2ms)
+
+
+Started GET "/session/new" for ::1 at 2020-06-02 08:06:03 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 520ms (Views: 518.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/4/new" for ::1 at 2020-06-02 08:06:08 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/4/new"):
+  
+actionpack (5.2.4.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/bands/4/new" for ::1 at 2020-06-02 08:06:19 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/bands/4/new"):
+  
+actionpack (5.2.4.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/bands/4/albums/new" for ::1 at 2020-06-02 08:06:34 +0900
+Processing by AlbumsController#new as HTML
+  Parameters: {"band_id"=>"4"}
+  [1m[36mBand Load (2.8ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:4
+  Rendering albums/new.html.erb within layouts/application
+  Rendered albums/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 70ms (Views: 31.0ms | ActiveRecord: 19.4ms)
+
+
+Started POST "/albums" for ::1 at 2020-06-02 08:07:06 +0900
+Processing by AlbumsController#create as HTML
+  Parameters: {"album_name"=>"Miss Americana", "album_year"=>"2020"}
+Completed 400 Bad Request in 19ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: album:
+  app/controllers/albums_controller.rb:45:in `album_params'
+  app/controllers/albums_controller.rb:10:in `create'
+
+Started POST "/__better_errors/0924c72ac5cc8c82/variables" for ::1 at 2020-06-02 08:07:06 +0900
+Started POST "/albums" for ::1 at 2020-06-02 08:08:00 +0900
+Processing by AlbumsController#create as HTML
+  Parameters: {"album_name"=>"Miss Americana", "album_year"=>"2020"}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: album:
+  app/controllers/albums_controller.rb:45:in `album_params'
+  app/controllers/albums_controller.rb:10:in `create'
+
+Started POST "/__better_errors/185ede5f52bf6058/variables" for ::1 at 2020-06-02 08:08:00 +0900
+Started GET "/bands/4/albums/new" for ::1 at 2020-06-02 08:08:12 +0900
+Processing by AlbumsController#new as HTML
+  Parameters: {"band_id"=>"4"}
+  [1m[36mBand Load (0.9ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:4
+  Rendering albums/new.html.erb within layouts/application
+  Rendered albums/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 51ms (Views: 47.6ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/albums" for ::1 at 2020-06-02 08:08:19 +0900
+Processing by AlbumsController#create as HTML
+  Parameters: {"album"=>{"name"=>"Garth Brroks greatest hits", "year"=>"2020"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/albums_controller.rb:11
+  [1m[35m (1.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/albums_controller.rb:11
+Completed 200 OK in 39ms (Views: 0.3ms | ActiveRecord: 10.1ms)
+
+
+Started GET "/bands/4/albums/new" for ::1 at 2020-06-02 08:10:38 +0900
+Processing by AlbumsController#new as HTML
+  Parameters: {"band_id"=>"4"}
+  [1m[36mBand Load (0.6ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:4
+  Rendering albums/new.html.erb within layouts/application
+  [1m[36mBand Load (0.3ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/albums/new.html.erb:8
+  Rendered albums/new.html.erb within layouts/application (10.7ms)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.9ms)
+
+
+
+ActionView::Template::Error - undefined method `name' for nil:NilClass:
+  app/views/albums/new.html.erb:8:in `view template'
+  app/controllers/albums_controller.rb:5:in `new'
+
+Started POST "/__better_errors/997f546fa50b8e57/variables" for ::1 at 2020-06-02 08:10:38 +0900
+Started GET "/bands/4/albums/new" for ::1 at 2020-06-02 08:11:24 +0900
+Processing by AlbumsController#new as HTML
+  Parameters: {"band_id"=>"4"}
+  [1m[36mBand Load (1.5ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:4
+  Rendering albums/new.html.erb within layouts/application
+  [1m[36mBand Load (0.9ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/albums/new.html.erb:2
+  Rendered albums/new.html.erb within layouts/application (13.0ms)
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 2.4ms)
+
+
+
+ActionView::Template::Error - undefined method `name' for nil:NilClass:
+  app/views/albums/new.html.erb:10:in `view template'
+  app/controllers/albums_controller.rb:5:in `new'
+
+Started POST "/__better_errors/d4c886fb2b096f09/variables" for ::1 at 2020-06-02 08:11:25 +0900
+  [1m[36mBand Load (1.4ms)[0m  [1m[34mSELECT "bands".* FROM "bands"[0m
+Started GET "/bands/4/albums/new" for ::1 at 2020-06-02 08:12:02 +0900
+Processing by AlbumsController#new as HTML
+  Parameters: {"band_id"=>"4"}
+  [1m[36mBand Load (0.5ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:4
+  Rendering albums/new.html.erb within layouts/application
+  [1m[36mBand Load (0.5ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/albums/new.html.erb:2
+  Rendered albums/new.html.erb within layouts/application (11.0ms)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 1.0ms)
+
+
+
+ActionView::Template::Error - undefined method `name' for nil:NilClass:
+  app/views/albums/new.html.erb:10:in `view template'
+  app/controllers/albums_controller.rb:5:in `new'
+
+Started POST "/__better_errors/42f9f6769b96622a/variables" for ::1 at 2020-06-02 08:12:03 +0900
+Started POST "/__better_errors/42f9f6769b96622a/variables" for ::1 at 2020-06-02 08:12:09 +0900
+Started GET "/bands/4/albums/new" for ::1 at 2020-06-02 08:12:31 +0900
+Processing by AlbumsController#new as HTML
+  Parameters: {"band_id"=>"4"}
+  [1m[36mBand Load (0.5ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:4
+  Rendering albums/new.html.erb within layouts/application
+  Rendered albums/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 31ms (Views: 28.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/bands/4/albums/new" for ::1 at 2020-06-02 08:20:30 +0900
+Processing by AlbumsController#new as HTML
+  Parameters: {"band_id"=>"4"}
+  [1m[36mBand Load (0.8ms)[0m  [1m[34mSELECT  "bands".* FROM "bands" WHERE "bands"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/albums_controller.rb:4
+  Rendering albums/new.html.erb within layouts/application
+  Rendered albums/new.html.erb within layouts/application (482.8ms)
+Completed 500 Internal Server Error in 495ms (ActiveRecord: 1.1ms)
+
+
+
+ActionView::Template::Error - undefined local variable or method `each' for #<#<Class:0x00007f90181f8d80>:0x00007f9018819340>:
+  app/views/albums/new.html.erb:13:in `view template'
+  app/controllers/albums_controller.rb:5:in `new'
+
+Started POST "/__better_errors/a1b9e5e717d282e8/variables" for ::1 at 2020-06-02 08:20:31 +0900
