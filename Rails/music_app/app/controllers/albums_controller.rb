@@ -9,7 +9,7 @@ class AlbumsController < ApplicationController
     def create
         @album = Album.new(album_params)
         if @album.save
-            render json: "#{@album.name} is saved!"
+            redirect_to band_url(@album.band_id)
         else
             render json: "ERROR!!!"
         end
@@ -17,12 +17,12 @@ class AlbumsController < ApplicationController
 
     def edit
         @album = Album.find_by(id: params[:id])
-        render json: "Replace this with an edit template for #{@album.name}"
+        render :edit
     end
 
     def show
         @album = Album.find_by(id: params[:id])
-        render json: "This is the show page for #{@album.name}"
+        render :show
     end
 
     def update

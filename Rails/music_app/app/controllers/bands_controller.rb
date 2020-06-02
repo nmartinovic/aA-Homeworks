@@ -29,7 +29,7 @@ class BandsController < ApplicationController
 
     def show
         @band = Band.find_by(id: params[:id])
-        render json: "#{@band} & this will be replaced by an show page"    
+        render :show
     end
 
     def update
@@ -46,6 +46,7 @@ class BandsController < ApplicationController
     def destroy
         @band = Band.find_by(id: params[:id])
         @band.destroy
+        redirect_to bands_url
     end
 
     private
