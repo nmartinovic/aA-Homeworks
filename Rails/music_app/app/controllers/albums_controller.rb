@@ -2,6 +2,7 @@ class AlbumsController < ApplicationController
 
     def new
         @band = Band.find_by(id: params[:band_id])
+        @album = Album.new()
         render :new
 
     end
@@ -17,6 +18,7 @@ class AlbumsController < ApplicationController
 
     def edit
         @album = Album.find_by(id: params[:id])
+        @band = Band.find_by(id: @album.band_id)
         render :edit
     end
 
@@ -28,7 +30,7 @@ class AlbumsController < ApplicationController
     def update
         @album = Album.find_by(id: params[:id])
         if @album.update_attributes(album_params)
-            render json: @album.attributes
+            redirect_to band_url(@album.band_id)
         else
             render json: "This caused an error"
         end
@@ -37,6 +39,7 @@ class AlbumsController < ApplicationController
     def destroy
         @album = Album.find_by(id: params[:id])
         @album.destroy
+        redirect_to band_url(@album.band_id)
     end
 
     private
