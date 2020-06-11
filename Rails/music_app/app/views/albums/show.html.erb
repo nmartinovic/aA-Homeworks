@@ -4,7 +4,15 @@
 <h1>Album: <%= @album.name %></h1>
 <h1>Artist: <%= @album.band.name %></h1>
 
+<ul>
+<% @album.tracks.each do |track|%>
+<li><a href="<%= track_url(track.id)%>"><%= track.name %></a></li>
+
+<% end%>
+</ul>
+
 <a href="<%= band_url(@album.band_id)%>">Back to artist page</a><br>
+<a href="<%= new_album_track_url(@album.id)%>">Add a song </a><br>
 <a href="<%= edit_album_url(@album.id) %>">Edit Album</a>
 <form action="<%= album_url(@album.id)%>" method="POST">
 <%= auth_token %>
