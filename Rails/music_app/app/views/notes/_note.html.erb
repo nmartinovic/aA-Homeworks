@@ -1,0 +1,16 @@
+<h2>These are the notes</h2>
+
+
+<ul>
+<% track.notes.each do |note|%>
+<li><%= note.text %> </li>
+<p>Author: <%= note.user.email %></p>
+<form action="<%= note_url(note.id) %>" method="POST">
+<%= auth_token %>
+<input type="hidden" name="_method" value="DELETE">
+<input type="submit" value="DELETE">
+</form>
+
+<% end %>
+
+</ul>
