@@ -1,5 +1,7 @@
 <h1>Please sign up</h1>
 
+<p><%= !flash[:errors].nil? ? "Email is already taken" : ""%></p>
+
 <form action="<%= users_url %>" method="POST">
 <label for="user_email">Enter email</label>
 <input type="text" id= "user_email" name = "user[email]">
@@ -9,3 +11,5 @@
 
 <input type="submit" value="Create account">
 </form>
+
+<a href="<%= new_session_url %>">I already have an account</a>

@@ -1,5 +1,7 @@
 class BandsController < ApplicationController
 
+    before_action :require_current_user!
+
     def create
         #TODO update the views for band:create
         @band = Band.new(band_params)

@@ -4,11 +4,12 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
 
-        if @user.save!
+        if @user.save
             login!(@user)
             redirect_to user_url(@user)
         else
-            render json: "There was an error"
+            flash[:errors] = @user.errors.messages
+            redirect_to new_user_url
         end
     end
 

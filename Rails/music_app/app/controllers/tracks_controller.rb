@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+    before_action :require_current_user!
+
 
     def new
         #page to create a new track
