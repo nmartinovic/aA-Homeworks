@@ -9,10 +9,13 @@ def create
 end
 
 def destroy
-    
     @note = Note.find_by(id: params[:id])
-    @note.destroy
-    redirect_to track_url(@note.track_id)
+    if session[:session_token] == @note.user.session_token
+        @note.destroy
+        redirect_to track_url(@note.track_id)
+    else
+        render json: "YOU CANNOT DELETE THIS!!!"
+    end
 end
 
 private
