@@ -26,10 +26,14 @@ RSpec.describe User, type: :model do
   end
 
   describe '::find_by_credentials' do
-    it 'should find the user' do
-      nick = User.create(email:'nick',password:'nicknick')
-      expect(User.find_by(email: 'nick').where_values_hash).to eq({'email' => 'nick'})
+    nick = User.create(email:'nick2',password:'nick2nick2') 
+    it 'should find the user if the password is right' do
+      expect(User.find_by_credentials('nick2','nick2nick2')).to eq(User.find_by(email: 'nick2'))
     end
+
+      it 'should not find the user if the password is wrong' do
+        expect(User.find_by_credentials('nick2','nick2nick1')).to eq(nil)
+      end
   end
 
 end
