@@ -1,0 +1,14 @@
+<h1>Create a User</h1>
+
+<p><%= flash.now[:errors] %></p>
+
+<form action="<%= users_url %>" method="POST">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+<label for="user_email">Enter email</label>
+<input type="text" id="user_email" name="user[email]">
+
+<label for="user_password">Enter Password</label>
+<input type="text" id="user_password" name="user[password]">
+<br>
+<input type="submit" name="Submit">
+</form>
