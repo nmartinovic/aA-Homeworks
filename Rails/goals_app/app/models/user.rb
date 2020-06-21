@@ -2,8 +2,9 @@
 class User < ApplicationRecord
         attr_reader :password
 
-        validates :email, null:false
-        validates :password, length: { minimum: 6, allow_nil: true}
+        validates :email, null:false, presence: true
+        validates :password, length: { minimum: 6, allow_nil: true}, presence: true
+        validates :password_digest, presence: true
 
         after_initialize :ensure_session_token
     # t.string :email, null: false
